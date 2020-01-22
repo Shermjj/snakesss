@@ -1,4 +1,4 @@
-# snakes
+# snakesss
 Snake but with multiple of them happening concurrently
 
 Made with node-js. 

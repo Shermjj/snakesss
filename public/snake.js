@@ -7,7 +7,7 @@ function Snake(context) {
   this.tail = [];
 
   this.draw = function() {
-    context.fillStyle = "#FFFFFF";
+    context.fillStyle = "#7b9696";
     for (let i=0; i<this.tail.length; i++) {
       context.fillRect(this.tail[i].x,
         this.tail[i].y, scale, scale);

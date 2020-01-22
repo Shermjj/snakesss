@@ -10,7 +10,7 @@ function Fruit(context) {
   }
 
   this.draw = function() {
-    context.fillStyle = "#4cafab";
+    context.fillStyle = "#000000";
     context.fillRect(this.x, this.y, scale, scale)
   }
 }

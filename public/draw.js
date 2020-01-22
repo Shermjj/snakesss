@@ -43,6 +43,18 @@ var currentWindow = 0;
 
 
 window.addEventListener('keydown', ((evt) => {
+  switch(evt.key){
+    case 'q':
+      canvas1.style.border = '5px solid #ffffff'
+      currentWindow = 0;
+      canvas.style.border = '5px solid #ff0000';
+      break;
+    case 'e':
+      canvas.style.border = '5px solid #ffffff'
+      currentWindow = 1;
+      canvas1.style.border = '5px solid #ff0000';
+      break;
+  }
   const direction = evt.key.replace('Arrow', '');
   if(currentWindow == 0){
     snake.changeDirection(direction);
@@ -50,12 +62,3 @@ window.addEventListener('keydown', ((evt) => {
     snake1.changeDirection(direction);
   }
 }));
-
-canvas.addEventListener('click',((evt) => {
-  currentWindow =0;
-}));
-
-canvas1.addEventListener('click',((evt) => {
-  currentWindow =1;
-}));
-

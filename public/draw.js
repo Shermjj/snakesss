@@ -1,64 +1,55 @@
-const canvas = document.querySelector(".canvas");
-const canvas1 = document.querySelector(".canvas1");
-
-const ctx = canvas.getContext("2d");
-const ctx1 = canvas1.getContext("2d");
+const canvasarray = document.getElementsByTagName("canvas");
+let ctxarray = [];
 const scale = 10;
-const rows = canvas.height / scale;
-const columns = canvas.width / scale;
-var snake,snake1;
+const canvas_height = canvasarray[0].height;
+const canvas_width = canvasarray[0].width;
+const rows = canvas_height / scale;
+const columns = canvas_width / scale;
+
 var currentWindow = 0;
 
 (function setup() {
-  snake = new Snake(ctx);
-  snake1 = new Snake(ctx1);
-  fruit = new Fruit(ctx);
-  fruit1 = new Fruit(ctx1);
-  fruit.pickLocation();
-  fruit1.pickLocation();
+  for(const [i,arr] of Array.from(canvasarray).entries()){
+    let ctx = arr.getContext("2d");
+    ctxarray[i] = {};
+    ctxarray[i].snake = new Snake(ctx);
+    ctxarray[i].fruit = new Fruit(ctx);
+    ctxarray[i].fruit.pickLocation();
 
-  window.setInterval(() => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    fruit.draw();
-    snake.update();
-    snake.draw();
-    if (snake.eat(fruit)) {
-      fruit.pickLocation();
-    }
-    snake.checkCollision();
-  }, 250);
-
-  window.setInterval(() => {
-    ctx1.clearRect(0, 0, canvas.width, canvas.height);
-    fruit1.draw();
-    snake1.update();
-    snake1.draw();
-    if (snake1.eat(fruit1)) {
-      fruit1.pickLocation();
-    }
-    snake1.checkCollision();
-  },250);
-  
+    window.setInterval(() => {
+      ctx.clearRect(0, 0, canvas_width, canvas_height);
+      ctxarray[i].fruit.draw();
+      ctxarray[i].snake.update();
+      ctxarray[i].snake.draw();
+      if (ctxarray[i].snake.eat(ctxarray[i].fruit)) {
+        ctxarray[i].fruit.pickLocation();
+      }
+      ctxarray[i].snake.checkCollision();
+    }, 250);
+  }
+ 
 }());
-
 
 window.addEventListener('keydown', ((evt) => {
   switch(evt.key){
     case 'q':
-      canvas1.style.border = '5px solid #ffffff'
-      currentWindow = 0;
-      canvas.style.border = '5px solid #ff0000';
+      if(currentWindow == 0){
+        break;
+      }
+      canvasarray[currentWindow].style.borderStyle = 'solid';
+      currentWindow-=1 ;
+      canvasarray[currentWindow].style.borderStyle = 'dashed';
       break;
     case 'e':
-      canvas.style.border = '5px solid #ffffff'
-      currentWindow = 1;
-      canvas1.style.border = '5px solid #ff0000';
+      if(currentWindow == canvasarray.length - 1){
+        break;
+      }
+      canvasarray[currentWindow].style.borderStyle = 'solid';
+      currentWindow+=1 ;
+      canvasarray[currentWindow].style.borderStyle = 'dashed';
       break;
   }
   const direction = evt.key.replace('Arrow', '');
-  if(currentWindow == 0){
-    snake.changeDirection(direction);
-  } else{
-    snake1.changeDirection(direction);
-  }
+  ctxarray[currentWindow].snake.changeDirection(direction);
 }));
+

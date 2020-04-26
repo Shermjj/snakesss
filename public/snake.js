@@ -27,21 +27,21 @@ function Snake(context) {
     this.x += this.xSpeed;
     this.y += this.ySpeed;
 
-    if (this.x > canvas.width) {
+    if (this.x > canvas_width) {
       this.x = 100;
       this.y = 100;
       this.total = 0;
       this.tail = [];
-      this.xSpeed = 0;
+      this.xSpeed = scale * 1;
       this.ySpeed = 0;
     }
 
-    if (this.y > canvas.height) {
+    if (this.y > canvas_height) {
       this.x = 100;
       this.y = 100;
       this.total = 0;
       this.tail = [];
-      this.xSpeed = 0;
+      this.xSpeed = scale * 1;
       this.ySpeed = 0;
 
     }
@@ -51,7 +51,7 @@ function Snake(context) {
       this.y = 100;
       this.total = 0;
       this.tail = [];
-      this.xSpeed = 0;
+      this.xSpeed = scale * 1;
       this.ySpeed = 0;
 
     }
@@ -61,7 +61,7 @@ function Snake(context) {
       this.y = 100;
       this.total = 0;
       this.tail = [];
-      this.xSpeed = 0;
+      this.xSpeed = scale * 1;
       this.ySpeed = 0;
 
     }
